@@ -121,6 +121,18 @@ body {
 	box-shadow: 0 0 20px rgba(168, 168, 168, 0.411);
 }
 
+.diff-value {
+	position: absolute;
+	bottom: 140px;
+	left: 100px;
+	text-align: center;
+	font-size: 26px;
+	font-family: Verdana;
+	color: #000;
+	visibility: hidden;
+	text-shadow: 0 0 7px rgba(133, 11, 27, 0.705);
+}
+
 .ancient {
 	height: 573px;
 	background-size: cover;	

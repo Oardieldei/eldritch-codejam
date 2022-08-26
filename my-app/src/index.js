@@ -192,18 +192,17 @@ function getCardsByStage(cardsArray, ancientIndex) {
 	stTwo = shuffle(stTwo)
 	stThree = shuffle(stThree)
 
+	console.log([stOne, stTwo, stThree])
 	return [stOne, stTwo, stThree]
 }
 
-console.log(getCardsByStage(noobMod(0), 0))
-
 let ancientIndexValue
-let difficultValue
 
 const ancientsDiv = document.querySelector('.ancients')
 const yourAncientDiv = document.querySelector('.your-ancient')
 const difficultDiv = document.querySelector('.difficulties')
 const diffTextDiv = document.querySelector('.diff-text')
+const diffValueDiv = document.querySelector('.diff-value')
 
 for (let child of ancientsDiv.children) {
 	child.addEventListener('click', () => {
@@ -214,32 +213,32 @@ for (let child of ancientsDiv.children) {
 			ancientsDiv.style.opacity = '0'
 		}, 1900)
 		setTimeout(() => {
-			yourAncientDiv.style.visibility = 'visible'			
+			yourAncientDiv.style.visibility = 'visible'
 			yourAncientDiv.classList.add('item-on')
 		}, 1200)
 		setTimeout(() => {
-			difficultDiv.style.visibility = 'visible'		
-			difficultDiv.children[0].style.visibility = 'visible'			
+			difficultDiv.style.visibility = 'visible'
+			difficultDiv.children[0].style.visibility = 'visible'
 			difficultDiv.children[0].classList.add('item-on')
 		}, 2400)
 		setTimeout(() => {
-			difficultDiv.children[1].style.visibility = 'visible'			
+			difficultDiv.children[1].style.visibility = 'visible'
 			difficultDiv.children[1].classList.add('item-on')
 		}, 2900)
 		setTimeout(() => {
-			difficultDiv.children[2].style.visibility = 'visible'			
+			difficultDiv.children[2].style.visibility = 'visible'
 			difficultDiv.children[2].classList.add('item-on')
 		}, 3400)
 		setTimeout(() => {
-			difficultDiv.children[3].style.visibility = 'visible'			
+			difficultDiv.children[3].style.visibility = 'visible'
 			difficultDiv.children[3].classList.add('item-on')
 		}, 3900)
 		setTimeout(() => {
-			difficultDiv.children[4].style.visibility = 'visible'			
+			difficultDiv.children[4].style.visibility = 'visible'
 			difficultDiv.children[4].classList.add('item-on')
 		}, 4400)
 		setTimeout(() => {
-			diffTextDiv.style.visibility = 'visible'			
+			diffTextDiv.style.visibility = 'visible'
 			diffTextDiv.classList.add('item-on')
 		}, 4900)
 	})
@@ -249,6 +248,7 @@ ancientsDiv.children[0].addEventListener('click', () => {
 	setTimeout(() => {
 		ancientIndexValue = 0
 		yourAncientDiv.style.width = '443px'
+		diffValueDiv.style.width = '443px'
 		yourAncientDiv.style.backgroundImage = "url('./assets/Ancients/Azathoth.png')"
 	}, 1200)
 })
@@ -257,6 +257,7 @@ ancientsDiv.children[1].addEventListener('click', () => {
 	setTimeout(() => {
 		ancientIndexValue = 1
 		yourAncientDiv.style.width = '436px'
+		diffValueDiv.style.width = '436px'
 		yourAncientDiv.style.backgroundImage = "url('./assets/Ancients/Cthulthu.png')"
 	}, 1200)
 })
@@ -265,6 +266,7 @@ ancientsDiv.children[2].addEventListener('click', () => {
 	setTimeout(() => {
 		ancientIndexValue = 2
 		yourAncientDiv.style.width = '438px'
+		diffValueDiv.style.width = '438px'
 		yourAncientDiv.style.backgroundImage = "url('./assets/Ancients/IogSothoth.png')"
 	}, 1200)
 })
@@ -273,6 +275,7 @@ ancientsDiv.children[3].addEventListener('click', () => {
 	setTimeout(() => {
 		ancientIndexValue = 3
 		yourAncientDiv.style.width = '440px'
+		diffValueDiv.style.width = '440px'
 		yourAncientDiv.style.backgroundImage = "url('./assets/Ancients/ShubNiggurath.png')"
 	}, 1200)
 })
@@ -315,4 +318,44 @@ difficultDiv.children[4].addEventListener('mouseenter', () => {
 
 difficultDiv.children[4].addEventListener('mouseleave', () => {
 	diffTextDiv.innerHTML = ''
+})
+
+for (let i = 0; i < difficultDiv.children.length; i++) {
+	difficultDiv.children[i].addEventListener('click', () => {
+		difficultDiv.classList.add('item-off')
+		difficultDiv.classList.remove('item-on')
+		diffTextDiv.classList.add('item-off')
+		diffTextDiv.classList.remove('item-on')
+		setTimeout(() => {
+			difficultDiv.style.visibility = 'hidden'
+			diffTextDiv.style.visibility = 'hidden'
+			difficultDiv.style.opacity = '0'
+			diffTextDiv.style.opacity = '0'
+
+			diffValueDiv.innerHTML = difficultDiv.children[i].innerHTML
+			diffValueDiv.style.visibility = 'visible'
+			diffValueDiv.classList.add('item-on')
+
+		}, 1900)
+	})
+}
+
+difficultDiv.children[0].addEventListener('click', () => {
+	getCardsByStage(noobMod(ancientIndexValue), ancientIndexValue)
+})
+
+difficultDiv.children[1].addEventListener('click', () => {
+	getCardsByStage(easyMod(ancientIndexValue), ancientIndexValue)
+})
+
+difficultDiv.children[2].addEventListener('click', () => {
+	getCardsByStage(normalMod(ancientIndexValue), ancientIndexValue)
+})
+
+difficultDiv.children[3].addEventListener('click', () => {
+	getCardsByStage(hardMod(ancientIndexValue), ancientIndexValue)
+})
+
+difficultDiv.children[4].addEventListener('click', () => {
+	getCardsByStage(impossibleMod(ancientIndexValue), ancientIndexValue)
 })
