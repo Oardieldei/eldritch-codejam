@@ -97,7 +97,7 @@ body {
 
 .difficult:hover {
 	cursor: pointer;
-	color: rgb(26, 26, 26);
+	color: rgb(0, 0, 0);
 	text-shadow: 0 0 5px rgba(109, 11, 133, 0.705);
 }
 
@@ -131,6 +131,16 @@ body {
 	color: #000;
 	visibility: hidden;
 	text-shadow: 0 0 7px rgba(133, 11, 27, 0.705);
+	transition: .3s;
+}
+
+.diff-value:hover {
+	text-shadow: 0 0 7px rgba(109, 11, 133, 0.705);
+	cursor: pointer;	
+}
+
+.diff-value:active {
+	text-shadow: 0 0 7px rgba(168, 168, 168, 0.411);
 }
 
 .ancient {
@@ -151,20 +161,60 @@ body {
 	top: 50%;
 	transform: translateY(-50%);	
 	visibility: hidden;
+	transition: .3s;
+}
+
+.your-ancient:hover {
+	cursor: pointer;
+	transform: translateY(-50%) scale(1.03, 1.03);
+	box-shadow: 0 0 20px rgba(109, 11, 133, 0.705);
+}
+
+.your-ancient:hover::before {
+	content: 'Выбрать';
+	left: 50%;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	position: absolute;
+	font-size: 26px;
+	font-family: Verdana;
+	color: #000;
+	text-shadow: 0 0 7px rgba(109, 11, 133, 0.705);
+	animation: textOn .3s;
+}
+
+.your-ancient:active {
+	box-shadow: 0 0 20px rgba(124, 124, 124, 0.541);
+}
+
+.your-ancient:active::before {
+	text-shadow: 0 0 5px rgba(124, 124, 124, 0.541);
 }
 
 .item-on {
-	animation: itemOn 3s;
+	animation: itemOn 2s;
 }
 
 .item-off {
 	animation: itemOff 2s;
 }
 
+.popup-on {
+	animation: textOn 1s;
+}
+
+.popup-off {
+	animation: itemOff 1s;
+}
+
 .ancient:hover {
 	cursor: pointer;
 	transform: scale(1.03, 1.03);
 	box-shadow: 0 0 20px rgba(109, 11, 133, 0.705);
+}
+
+.ancient:active {
+	box-shadow: 0 0 20px rgba(133, 11, 27, 0.705);
 }
 
 .azathoth {
@@ -187,12 +237,189 @@ body {
 	background-image: url('./assets/Ancients/ShubNiggurath.png');
 }
 
-@keyframes itemOn {
+.cards-container {
+	position: absolute;
+	right: 100px;
+	width: 1203px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	gap: 5px;
+	visibility: hidden;	
+}
+
+.card-deck {
+	width: 139px;
+	height: 645px;
+	display: flex;
+	align-items: flex-start;
+}
+
+.deck-container {
+	width: 139px;
+	height: 205px;
+	background-image: url('./assets/mythicCardBackground.png');
+	background-size: cover;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(156, 156, 156, 0.541);
+	transition: .3s;
+}
+
+.deck-container:hover {
+	cursor: pointer;
+	box-shadow: 0 0 20px rgba(109, 11, 133, 0.705);
+}
+
+.deck-container:active {
+	box-shadow: 0 0 20px rgba(133, 11, 27, 0.705);
+}
+
+.card-counter {
+	flex-basis: 32px;
+	height: 645px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;	
+}
+
+.counter {
+	height: 205px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 15px;
+}
+
+.count {
+	width: 100%;
+	height: 25px;
+	border-radius: 3px;
+	border: solid 2px black;
+	box-shadow: 0 0 10px rgba(156, 156, 156, 0.541), 0 0 10px rgb(0, 0, 0) inset;
+	text-align: center;
+	padding-top: 2px;
+	font-family: "Comic Sans MS";
+	font-weight: 700;
+	text-shadow: 0 0 7px rgba(0, 0, 0, 0.637);
+}
+
+.counter-green {
+	background-color: rgb(0, 87, 0);
+}
+
+.counter-brown {
+	background-color: rgb(170, 141, 44);
+}
+
+.counter-blue {
+	background-color: rgb(46, 85, 158);
+}
+
+.cards {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.stage {
+	width: 100%;
+	height: 205px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.stage-card {	
+	border-radius: 3px;
+	width: 139px;
+	background: rgba(87, 87, 87, 0.267);
+	box-shadow: 0 0 5px rgba(156, 156, 156, 0.541);
+	transition: .5s;
+}
+
+.stage-card:hover {
+	cursor: pointer;
+	box-shadow: 0 0 20px rgba(109, 11, 133, 0.705);
+	transform: scale(1.03, 1.03);
+}
+
+.stage-card:active {
+	box-shadow: 0 0 20px rgba(133, 11, 27, 0.705);
+}
+
+.card-up_bg, .end-deck_bg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.849);
+	visibility: hidden;
+}
+
+.card-up {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);	
+	border-radius: 7px;
+	box-shadow: 0 0 10px rgba(133, 11, 27, 0.705);
+}
+
+.ecd-deck_text, .end-deck_retry {
+	position: absolute;
+	top: 50%;
+	left: 50%;		
+	font-family: Verdana;
+	text-shadow: 0 0 8px rgba(133, 11, 27, 0.705);	
+	color: rgba(133, 11, 27, 0.705);
+}
+
+.ecd-deck_text {
+	font-size: 120px;
+	transform: translate(-50%, -50%);	
+}
+
+.end-deck_retry {
+	font-size: 36px;
+	transform: translate(-50%, 220px);	
+	text-decoration: underline;
+	transition: .3s;
+	visibility: hidden;
+}
+
+
+.end-deck_retry:hover {
+	color: rgba(168, 168, 168, 0.411);
+	text-shadow: 0 0 8px rgba(168, 168, 168, 0.411);	
+	cursor: pointer;
+}
+
+.end-deck_retry:active {
+	color: rgba(109, 11, 133, 0.705);
+	text-shadow: 0 0 8px rgba(109, 11, 133, 0.705);	
+}
+
+.card-up > img {
+	border-radius: 7px;
+}
+
+
+
+@keyframes textOn {
 	from {
 		opacity: 0;
 	}
 
-	30% {
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes itemOn {
+	from {
 		opacity: 0;
 	}
 
